@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>CoreDAO — Satoshi Plus Consensus, CORE Token, BTC Staking &amp; How It Works (2026)</title>
+  <meta name="description" content="Complete CoreDAO guide (2026): how Core Chain's Satoshi Plus consensus combines Bitcoin mining, DPoS, and BTC staking, CORE token utility, how to stake BTC on Core, validator selection, coreBTC, developer ecosystem, risks, and a deep FAQ.">
+  <meta name="author" content="Crypto Finance Experts">
+  <link rel="canonical" href="https://coredao-guide.example.com/">
+  <link rel="icon" type="image/png" href="corelogo.png">
+
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://coredao-guide.example.com/">
+  <meta property="og:title" content="CoreDAO — Satoshi Plus Consensus, CORE Token &amp; BTC Staking Guide (2026)">
+  <meta property="og:description" content="Practical CoreDAO guide: Satoshi Plus consensus, BTC staking on Core Chain, CORE token, validators, coreBTC, developer use cases, and risks.">
+  <meta property="og:image" content="cover.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CoreDAO — Satoshi Plus &amp; BTC Staking Guide (2026)">
+  <meta name="twitter:description" content="How CoreDAO's Satoshi Plus consensus works, BTC staking on Core Chain, CORE token utility, and how to participate safely in 2026.">
+
+  <style>
+    :root {
+      --o:    #E84142;
+      --o2:   #C73535;
+      --o3:   #A52828;
+      --ol:   #F87171;
+      --oa:   #FEF2F2;
+      --ob:   #FECACA;
+
+      --ink:  #1C0A0A;
+      --sub:  #3B0E0E;
+      --body: #374151;
+      --muted:#6B7280;
+      --dim:  #9CA3AF;
+
+      --bg:   #FAFAFA;
+      --bg2:  #FFF5F5;
+      --bg3:  #FEE2E2;
+      --card: #FFFFFF;
+      --line: rgba(0,0,0,.08);
+      --line-o:rgba(232,65,66,.14);
+
+      --ok:   #059669;
+      --warn: #D97706;
+      --err:  #DC2626;
+
+      --r:  12px;
+      --rl: 18px;
+      --gap: 1.2rem;
+      --sh: 0 1px 4px rgba(232,65,66,.06), 0 4px 16px rgba(232,65,66,.07);
+      --sh-md: 0 2px 8px rgba(232,65,66,.08), 0 8px 28px rgba(232,65,66,.10);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0 }
+    html { scroll-behavior: smooth }
+    body {
+      font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--body);
+      line-height: 1.72;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    a { color: var(--o); text-decoration: none }
+    a:hover { text-decoration: underline }
+    img { max-width: 100%; height: auto; display: block }
+    strong { color: var(--ink); font-weight: 700 }
+    .container { max-width: 1080px; margin: 0 auto; padding: 0 1.4rem }
+
+    h1,h2,h3,h4 { color: var(--ink); line-height: 1.25 }
+    h1 { font-size: clamp(2rem,5vw,3.1rem); font-weight: 800; letter-spacing: -.4px }
+    h2 { font-size: clamp(1.2rem,2.4vw,1.65rem); font-weight: 700; margin-top: 1.8rem; padding-top: .7rem; border-top: 1px solid var(--line) }
+    h3 { font-size: 1.06rem; font-weight: 700; color: var(--o2) }
+    p,li,td,th { font-size: 1rem; line-height: 1.75 }
+    .lead { font-size: 1.08rem; color: var(--sub) }
+
+    /* HERO */
+    header.hero {
+      background: linear-gradient(160deg, #FFF5F5 0%, #FAFAFA 65%);
+      padding: clamp(2.5rem,6vw,5rem) 0 clamp(2rem,4vw,3.5rem);
+      border-bottom: 1px solid var(--line);
+    }
+    .hero-card {
+      background: var(--card);
+      border: 1px solid var(--line-o);
+      border-radius: var(--rl);
+      padding: clamp(1.6rem,3.5vw,2.4rem);
+      box-shadow: var(--sh-md);
+    }
+    .brand-row { display: flex; align-items: center; gap: .9rem; margin-bottom: 1rem }
+    .brand-logo {
+      width: 54px; height: 54px; border-radius: 13px;
+      border: 1px solid var(--ob);
+      background: var(--oa);
+      padding: .3rem; object-fit: contain;
+      box-shadow: 0 2px 8px rgba(232,65,66,.14);
+      flex: 0 0 auto;
+    }
+    .brand-label { color: var(--dim); font-size: .85rem; font-weight: 600; text-transform: uppercase; letter-spacing: .4px }
+    .brand-sub   { color: var(--muted); font-size: .85rem }
+
+    /* CTA */
+    .cta-center { display: flex; justify-content: center; margin-top: 2rem }
+    .cta {
+      display: inline-flex; align-items: center; gap: .7rem;
+      background: linear-gradient(135deg, #F87171 0%, #E84142 40%, #C73535 78%, #A52828 100%);
+      color: #fff;
+      padding: 1.2rem 3rem;
+      border-radius: 16px;
+      font-weight: 900; font-size: 1.15rem; letter-spacing: .15px;
+      box-shadow:
+        0 0 0 1px rgba(232,65,66,.22),
+        0 4px 14px rgba(199,53,53,.28),
+        0 16px 40px rgba(165,40,40,.20);
+      border: none; cursor: pointer; text-decoration: none;
+      transition: transform .18s, box-shadow .18s, filter .18s;
+    }
+    .cta:hover {
+      transform: translateY(-3px) scale(1.025); filter: brightness(1.07); color: #fff;
+      text-decoration: none;
+      box-shadow:
+        0 0 0 1px rgba(232,65,66,.35),
+        0 6px 20px rgba(199,53,53,.36),
+        0 22px 50px rgba(165,40,40,.26);
+    }
+    .cta-icon { font-size: 1.25rem }
+
+    /* NOTE */
+    .note {
+      border-left: 3px solid var(--o);
+      padding: .8rem 1rem;
+      background: var(--oa);
+      border-radius: 0 9px 9px 0;
+      color: var(--o2);
+      margin-top: 1rem;
+    }
+
+    /* STEPS */
+    section.step-guide {
+      background: var(--bg2);
+      padding: clamp(2rem,5vw,3.5rem) 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .steps { display: grid; gap: var(--gap); grid-template-columns: 1fr }
+    .step {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-top: 3px solid var(--o);
+      border-radius: var(--r);
+      padding: 1.25rem;
+      box-shadow: var(--sh);
+      transition: transform .18s, box-shadow .18s;
+    }
+    .step:hover { transform: translateY(-3px); box-shadow: var(--sh-md) }
+    .step .icon {
+      width: 44px; height: 44px; border-radius: 9px;
+      display: inline-grid; place-items: center;
+      background: var(--oa);
+      margin-bottom: .65rem;
+      font-weight: 800; font-size: .95rem; color: var(--o);
+      border: 1px solid var(--ob);
+    }
+
+    /* CARD */
+    main { padding-top: .5rem }
+    main .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--r);
+      padding: 1.5rem;
+      margin: 1.2rem 0;
+      box-shadow: var(--sh);
+    }
+    main .card > h2:first-child { margin-top: 0; border-top: none; padding-top: 0 }
+
+    /* TOC */
+    .toc {
+      border: 1px solid var(--line-o);
+      background: var(--oa);
+      border-radius: var(--r);
+      padding: 1.1rem 1.3rem;
+    }
+    .toc strong { color: var(--ink) }
+    .toc ul { margin: .5rem 0 0; padding-left: 1.1rem }
+    .toc li { margin: .28rem 0; font-size: .96rem }
+    .toc a { font-weight: 600 }
+
+    /* GRID */
+    .grid-2 { display: grid; gap: var(--gap); grid-template-columns: 1fr }
+    .callout-grid { display: grid; gap: var(--gap); grid-template-columns: 1fr; margin-top: .8rem }
+    .mini {
+      background: var(--bg2);
+      border: 1px solid var(--line-o);
+      border-radius: var(--r);
+      padding: 1rem;
+    }
+    .mini h3 { margin-bottom: .35rem }
+    .kpi-badges { display: flex; flex-wrap: wrap; gap: .45rem; margin-top: .55rem }
+    .kpi-badges span {
+      border: 1px solid var(--ob);
+      background: var(--oa);
+      color: var(--o2);
+      padding: .26rem .54rem;
+      border-radius: 999px; font-size: .87rem; font-weight: 700;
+    }
+
+    /* TABLE */
+    .table-wrap { overflow-x: auto; border-radius: var(--r); border: 1px solid var(--line) }
+    table { width: 100%; border-collapse: collapse; min-width: 460px }
+    th,td { padding: .8rem .95rem; border-bottom: 1px solid var(--line); text-align: left }
+    th { background: var(--oa); color: var(--ink); font-weight: 700; font-size: .93rem }
+    tr.hi { background: #FFFAFA }
+    tr:hover td { background: var(--bg2) }
+    tr:last-child td { border-bottom: none }
+    .ok   { color: var(--ok) }
+    .warn { color: var(--warn) }
+    .err  { color: var(--err) }
+
+    /* EEAT */
+    .eeat {
+      background: var(--card);
+      border: 1px solid var(--line-o);
+      border-radius: var(--r);
+      padding: 1.5rem;
+      box-shadow: var(--sh);
+    }
+    .eeat > h2:first-child { margin-top: 0; border-top: none; padding-top: 0 }
+
+    /* FAQ */
+    .faq-item { border-bottom: 1px solid var(--line); padding: .9rem 0 }
+    .faq-item:last-child { border-bottom: none }
+    .faq-button {
+      all: unset; display: flex; justify-content: space-between; align-items: flex-start;
+      width: 100%; cursor: pointer; gap: 1rem;
+    }
+    .faq-button:focus-visible { outline: 2px solid var(--o); border-radius: 4px }
+    .faq-button h3 { margin: 0; font-weight: 700; font-size: 1rem; line-height: 1.4; color: var(--ink) }
+    .faq-content { max-height: 0; overflow: hidden; transition: max-height .26s ease }
+    .faq-content.open { padding-top: .65rem }
+    .faq-plus { font-weight: 800; font-size: 1.35rem; color: var(--o); flex: 0 0 auto; line-height: 1; transition: transform .2s }
+    .faq-button[aria-expanded="true"] .faq-plus { transform: rotate(45deg) }
+
+    @media(min-width:860px){
+      .steps { grid-template-columns: repeat(4,1fr) }
+      .grid-2 { grid-template-columns: 1fr 1fr }
+      .callout-grid { grid-template-columns: 1fr 1fr }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero" role="banner">
+  <div class="container">
+    <div class="hero-card">
+      <div class="brand-row">
+        <img class="brand-logo" src="corelogo.png" alt="CoreDAO logo">
+        <div>
+          <div class="brand-label">Complete Network Guide</div>
+          <div class="brand-sub">Satoshi Plus · BTC Staking · CORE Token · Validators · coreBTC · EVM</div>
+        </div>
+      </div>
+
+      <h1>CoreDAO</h1>
+      <p class="lead" style="margin-top:.7rem">
+        The complete guide to <strong>CoreDAO and Core Chain</strong> — a <strong>Bitcoin-aligned
+        EVM-compatible Layer 1</strong> secured by a novel consensus mechanism called
+        <strong>Satoshi Plus</strong>, which combines Bitcoin mining hash power,
+        <strong>Delegated Proof of Stake (DPoS)</strong>, and non-custodial
+        <strong>Bitcoin staking</strong> into a single unified security model.
+        Understand how Satoshi Plus works, how to <strong>stake BTC</strong> on Core Chain
+        to earn <strong>CORE token rewards</strong>, what <strong>coreBTC</strong> is,
+        how the <strong>validator set</strong> operates, and what developers
+        can build on this Bitcoin-secured EVM chain.
+      </p>
+
+      <div class="cta-center">
+        <a href="#" class="cta" aria-label="Open Core Chain App">
+          <span class="cta-icon">₿</span> Open Core Chain App
+        </a>
+      </div>
+
+      <div class="note">
+        <strong>Core's unique proposition:</strong> Core Chain is the first blockchain to let
+        Bitcoin holders <em>earn yield on their BTC without wrapping it, bridging it,
+        or giving custody to a third party</em>. BTC remains in a time-locked Bitcoin
+        script — never leaving the Bitcoin network — while generating CORE rewards
+        on Core Chain. This is non-custodial Bitcoin staking.
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- STEPS -->
+<section class="step-guide" aria-labelledby="how-works">
+  <div class="container">
+    <h2 id="how-works" style="margin-top:0;border-top:none;padding-top:0;color:var(--ink)">
+      How Core Chain Works: Mine / Stake / Delegate → Score → Elect Validators → Earn
+    </h2>
+    <div class="steps" role="list">
+      <article class="step" role="listitem">
+        <div class="icon">01</div>
+        <h3>Bitcoin miners delegate hash power</h3>
+        <p>Bitcoin miners include a special OP_RETURN output in their coinbase transactions to signal support for a Core validator — delegating a portion of their hash power without any cost, hardware change, or mining pool disruption.</p>
+      </article>
+      <article class="step" role="listitem">
+        <div class="icon">02</div>
+        <h3>BTC holders time-lock their Bitcoin</h3>
+        <p>BTC holders create a time-locked transaction directly on Bitcoin mainnet using CLTV (CheckLockTimeVerify). This locks BTC for a chosen period and earns CORE token rewards — without BTC ever leaving the Bitcoin blockchain.</p>
+      </article>
+      <article class="step" role="listitem">
+        <div class="icon">03</div>
+        <h3>CORE holders delegate stake</h3>
+        <p>CORE token holders stake their tokens with validators on Core Chain, contributing to the DPoS layer of Satoshi Plus. All three inputs — hash power, BTC time-locks, and CORE stake — combine into a validator score.</p>
+      </article>
+      <article class="step" role="listitem">
+        <div class="icon">04</div>
+        <h3>Top validators elected, rewards distributed</h3>
+        <p>Each round, the top validators by combined Satoshi Plus score are elected to produce blocks. Block rewards and transaction fees are distributed to validators, CORE stakers, and BTC stakers proportionally.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN -->
+<main class="container" role="main">
+
+  <!-- TOC -->
+  <section class="card toc" aria-label="Table of Contents">
+    <strong>On this page — CoreDAO:</strong>
+    <ul>
+      <li><a href="#overview">What is CoreDAO and what makes Core Chain different</a></li>
+      <li><a href="#satoshi-plus">Satoshi Plus consensus: how all three layers work together</a></li>
+      <li><a href="#btc-staking">Non-custodial BTC staking: how to earn CORE with your Bitcoin</a></li>
+      <li><a href="#core-token">CORE token: utility, staking, and tokenomics</a></li>
+      <li><a href="#validators">Validators on Core Chain: roles, requirements, and selection</a></li>
+      <li><a href="#corebtc">coreBTC: wrapped Bitcoin on Core Chain explained</a></li>
+      <li><a href="#evm">Core Chain as an EVM platform: developer ecosystem</a></li>
+      <li><a href="#safety">CoreDAO risks: staking, smart-contract, and bridge risks</a></li>
+      <li><a href="#comparison">CoreDAO vs Rootstock vs Stacks vs Babylon: Bitcoin L2 comparison</a></li>
+      <li><a href="#best-practices">Best practices for BTC stakers and CORE holders</a></li>
+      <li><a href="#troubleshooting">Troubleshooting: BTC staking, reward claims, validator issues</a></li>
+      <li><a href="#eeat">Authoritative sources &amp; references</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+  </section>
+
+  <!-- OVERVIEW -->
+  <section class="card" id="overview">
+    <h2>What Is CoreDAO and What Makes Core Chain Different?</h2>
+    <p>
+      <strong>Core Chain</strong> (governed by CoreDAO) is a Layer 1 blockchain with full EVM
+      compatibility — meaning any Ethereum smart contract or dApp can be deployed on it —
+      secured by a unique consensus model called <strong>Satoshi Plus</strong> that incorporates
+      Bitcoin's proof-of-work security directly into its validator election process.
+    </p>
+    <p>
+      Unlike most EVM chains that rely exclusively on their own token for security,
+      Core Chain borrows security from both Bitcoin (via miner hash delegation and BTC time-locking)
+      and its own DPoS layer (via CORE staking). The result is a chain with EVM programmability,
+      Ethereum-compatible tooling, and Bitcoin-backed security — three properties no single chain
+      had previously combined in a production environment.
+    </p>
+
+    <div class="callout-grid">
+      <div class="mini">
+        <h3>For Bitcoin holders</h3>
+        <p style="color:var(--muted)">Earn CORE token yield on BTC holdings without wrapping, bridging, or surrendering custody. BTC stays on Bitcoin mainnet in a time-locked script — the first practical non-custodial yield mechanism for native Bitcoin.</p>
+        <div class="kpi-badges"><span>Non-custodial</span><span>CORE yield on BTC</span><span>No wrapping</span></div>
+      </div>
+      <div class="mini">
+        <h3>For Bitcoin miners</h3>
+        <p style="color:var(--muted)">Delegate hash power to Core validators at zero marginal cost — no hardware changes, no mining pool changes. Simply add a metadata output to coinbase transactions and earn CORE rewards on top of Bitcoin block rewards.</p>
+        <div class="kpi-badges"><span>Zero extra cost</span><span>Extra CORE income</span><span>No disruption</span></div>
+      </div>
+      <div class="mini">
+        <h3>For CORE stakers</h3>
+        <p style="color:var(--muted)">Stake CORE tokens with validators to participate in the DPoS layer of Satoshi Plus. Earn block rewards and a share of transaction fees proportional to your delegated stake and chosen validator's performance.</p>
+        <div class="kpi-badges"><span>Block rewards</span><span>Fee sharing</span><span>Validator selection</span></div>
+      </div>
+      <div class="mini">
+        <h3>For developers</h3>
+        <p style="color:var(--muted)">Deploy Solidity contracts on a Bitcoin-secured EVM chain. Access Bitcoin-native users and BTC liquidity via coreBTC. Build DeFi, NFT, and Web3 applications with Ethereum-compatible tooling on a chain backed by Bitcoin mining security.</p>
+        <div class="kpi-badges"><span>Full EVM</span><span>Solidity support</span><span>BTC liquidity</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SATOSHI PLUS -->
+  <section class="card" id="satoshi-plus">
+    <h2>Satoshi Plus Consensus: How Bitcoin PoW, BTC Staking, and DPoS Work Together</h2>
+    <p>
+      <strong>Satoshi Plus</strong> is Core Chain's consensus mechanism — a hybrid model that
+      combines three separate security inputs into a single validator scoring and election system.
+      Each validator's score in each round is determined by the sum of these three inputs.
+    </p>
+
+    <div class="table-wrap">
+      <table aria-label="Satoshi Plus components">
+        <thead>
+          <tr><th>Layer</th><th>Participant</th><th>How it works</th><th>What they earn</th></tr>
+        </thead>
+        <tbody>
+          <tr class="hi">
+            <td>Bitcoin PoW delegation</td>
+            <td>Bitcoin miners</td>
+            <td>Add Core validator address to coinbase OP_RETURN — signals hash power support with zero cost</td>
+            <td>CORE token rewards from block emissions</td>
+          </tr>
+          <tr>
+            <td>Non-custodial BTC staking</td>
+            <td>BTC holders</td>
+            <td>Time-lock BTC on Bitcoin mainnet using CLTV script, point to a Core validator</td>
+            <td>CORE token rewards proportional to BTC locked and duration</td>
+          </tr>
+          <tr class="hi">
+            <td>Delegated Proof of Stake</td>
+            <td>CORE holders</td>
+            <td>Stake CORE tokens with a chosen validator on Core Chain</td>
+            <td>Block rewards + transaction fees proportional to stake</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="margin-top:1rem">
+      Each round (1 day), the top <strong>21 validators</strong> by combined Satoshi Plus score
+      are elected to produce blocks. The score formula weights all three inputs — meaning
+      a validator with strong miner support, significant BTC time-locked behind them,
+      and large CORE stake delegation will consistently rank highly and earn the most rewards.
+    </p>
+
+    <div class="note">
+      <strong>Why this design matters:</strong> By incorporating Bitcoin's proof-of-work into its
+      consensus, Core Chain makes 51% attacks significantly more expensive than attacking a
+      pure DPoS chain. An attacker would need to not only accumulate CORE stake but also
+      command majority Bitcoin hash power — a far greater resource barrier.
+    </div>
+  </section>
+
+  <!-- BTC STAKING -->
+  <section class="card" id="btc-staking">
+    <h2>Non-Custodial BTC Staking on Core Chain: How to Earn CORE with Your Bitcoin</h2>
+    <p>
+      Core Chain's BTC staking is fundamentally different from every other "BTC yield" product
+      in crypto. There is no bridge, no wrapping, no custodian, and no smart contract on Core Chain
+      that holds your BTC. The Bitcoin stays on the Bitcoin network — secured by Bitcoin's own
+      infrastructure — under a time-lock you control.
+    </p>
+
+    <div class="callout-grid">
+      <div class="mini">
+        <h3>How the time-lock works</h3>
+        <p style="color:var(--muted)">You create a Bitcoin transaction that sends BTC to yourself but locks it with CLTV (CheckLockTimeVerify) — a native Bitcoin script opcode that prevents the output from being spent until a specified block height or timestamp. The script includes your chosen Core validator address in the metadata.</p>
+        <div class="kpi-badges"><span>CLTV script</span><span>Bitcoin-native</span><span>Self-custodied</span></div>
+      </div>
+      <div class="mini">
+        <h3>How rewards are generated</h3>
+        <p style="color:var(--muted)">Core Chain's protocol reads the time-lock metadata on Bitcoin and attributes BTC staking weight to the indicated validator. CORE token rewards are minted on Core Chain and sent to the reward address you specified in the time-lock transaction — your Bitcoin wallet address or any Core Chain address you designate.</p>
+        <div class="kpi-badges"><span>CORE rewards</span><span>On Core Chain</span><span>Proportional to BTC × time</span></div>
+      </div>
+    </div>
+
+    <h3 style="margin-top:1.2rem">BTC staking step-by-step</h3>
+    <ol style="padding-left:1.3rem; margin-top:.5rem">
+      <li style="margin-bottom:.5rem"><strong>Choose a validator</strong> — research validators by their Satoshi Plus score, commission rate, and track record in the official Core Chain staking interface.</li>
+      <li style="margin-bottom:.5rem"><strong>Choose a lock duration</strong> — longer locks typically earn higher reward rates. Minimum lock duration applies; check current parameters in the official app.</li>
+      <li style="margin-bottom:.5rem"><strong>Create the time-lock transaction</strong> — use the official Core staking interface which builds the CLTV script correctly. Do not manually construct this transaction unless you are technically proficient with Bitcoin scripts.</li>
+      <li style="margin-bottom:.5rem"><strong>Broadcast and confirm on Bitcoin</strong> — send the transaction on Bitcoin mainnet and wait for the required confirmations.</li>
+      <li style="margin-bottom:.5rem"><strong>Claim CORE rewards on Core Chain</strong> — once the staking is recognised, CORE rewards accrue and can be claimed from the Core Chain staking dashboard.</li>
+      <li><strong>Await lock expiry to retrieve BTC</strong> — your BTC becomes spendable again after the lock height/timestamp passes. No action needed from Core Chain to unlock — Bitcoin's own script handles expiry.</li>
+    </ol>
+
+    <div class="note">
+      <strong>Critical:</strong> Once a time-lock transaction is broadcast to Bitcoin, it cannot be reversed.
+      BTC is locked until the specified block height — not retrievable earlier under any circumstances.
+      Choose lock duration carefully and only lock BTC you can afford to be illiquid for that period.
+    </div>
+  </section>
+
+  <!-- CORE TOKEN -->
+  <section class="card" id="core-token">
+    <h2>CORE Token: Utility, Staking, Governance, and Tokenomics</h2>
+
+    <div class="table-wrap">
+      <table aria-label="CORE token utility">
+        <thead>
+          <tr><th>Function</th><th>How CORE is used</th></tr>
+        </thead>
+        <tbody>
+          <tr class="hi">
+            <td>Gas fees</td>
+            <td>All Core Chain transactions pay gas in CORE — the native currency of the EVM execution environment</td>
+          </tr>
+          <tr>
+            <td>Validator staking (DPoS)</td>
+            <td>Validators stake CORE as collateral; delegators stake CORE to increase validator score and earn rewards</td>
+          </tr>
+          <tr class="hi">
+            <td>BTC staking rewards</td>
+            <td>CORE tokens are the reward currency for BTC time-lock stakers — newly minted CORE distributed from block emissions</td>
+          </tr>
+          <tr>
+            <td>Governance</td>
+            <td>CORE holders vote on protocol upgrades, parameter changes, and DAO treasury decisions</td>
+          </tr>
+          <tr class="hi">
+            <td>DeFi collateral</td>
+            <td>CORE is used as collateral and liquidity in Core Chain's DeFi ecosystem — lending, DEXs, and yield protocols</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note" style="margin-top:1rem">
+      <strong>Tokenomics design:</strong> CORE has a fixed maximum supply with emissions that
+      decrease over time — similar in design philosophy to Bitcoin's halving schedule.
+      BTC staking rewards come from CORE emissions; as emissions decrease over time,
+      sustainable yield will increasingly need to come from Core Chain's transaction fee revenue.
+    </div>
+  </section>
+
+  <!-- VALIDATORS -->
+  <section class="card" id="validators">
+    <h2>Validators on Core Chain: Roles, Requirements, and How the Election Works</h2>
+    <p>
+      Core Chain elects <strong>21 active validators</strong> per round (each round is approximately 1 day)
+      from a larger set of registered validators, based on their combined Satoshi Plus score.
+    </p>
+
+    <div class="callout-grid">
+      <div class="mini">
+        <h3>Validator requirements</h3>
+        <p style="color:var(--muted)">Register with a minimum CORE self-stake, maintain a full Core Chain node with high uptime, and accept delegations from CORE stakers and BTC stakers. Validators set their own commission rates on delegator rewards.</p>
+        <div class="kpi-badges"><span>Minimum self-stake</span><span>Full node</span><span>High uptime</span></div>
+      </div>
+      <div class="mini">
+        <h3>Validator score composition</h3>
+        <p style="color:var(--muted)">Score = weighted sum of: delegated Bitcoin miner hash power + BTC time-locked in their favour + CORE tokens staked with them. The formula balances all three Satoshi Plus layers — no single layer dominates.</p>
+        <div class="kpi-badges"><span>Hash power</span><span>BTC locked</span><span>CORE staked</span></div>
+      </div>
+    </div>
+
+    <div class="note">
+      <strong>Validator selection for delegators:</strong> Choose validators with a strong and
+      consistent score across all three Satoshi Plus layers, low commission, high uptime,
+      and transparent operations. A validator that relies on only one of the three layers
+      is more vulnerable to score fluctuations than one with balanced multi-layer support.
+    </div>
+  </section>
+
+  <!-- coreBTC -->
+  <section class="card" id="corebtc">
+    <h2>coreBTC: Wrapped Bitcoin on Core Chain — How It Works and When to Use It</h2>
+    <p>
+      <strong>coreBTC</strong> is a decentralised, trust-minimised wrapped BTC token on Core Chain —
+      a way to bring BTC liquidity into Core Chain's DeFi ecosystem while keeping the wrapping
+      process as decentralised as possible.
+    </p>
+
+    <div class="callout-grid">
+      <div class="mini">
+        <h3>How coreBTC is minted</h3>
+        <p style="color:var(--muted)">Users send BTC to a decentralised locker network. Lockers are over-collateralised with CORE tokens as insurance against theft or failure. Once BTC is verified in a locker, equivalent coreBTC is minted on Core Chain and usable in DeFi protocols.</p>
+        <div class="kpi-badges"><span>Decentralised lockers</span><span>CORE-collateralised</span><span>1:1 backed</span></div>
+      </div>
+      <div class="mini">
+        <h3>coreBTC vs BTC time-lock staking</h3>
+        <p style="color:var(--muted)">BTC time-lock staking keeps BTC on Bitcoin mainnet — fully non-custodial. coreBTC moves BTC to Core Chain's locker network — trust-minimised but introduces custodial/smart-contract risk. Use time-lock staking for maximum security; coreBTC for DeFi interaction.</p>
+        <div class="kpi-badges"><span>Different risk profile</span><span>DeFi use case</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EVM -->
+  <section class="card" id="evm">
+    <h2>Core Chain as an EVM Platform: Developer Ecosystem and Use Cases</h2>
+    <p>
+      Core Chain is fully EVM-compatible — Solidity contracts, Ethereum developer tools
+      (Hardhat, Foundry, Ethers.js, Web3.js), MetaMask, and ERC standards all work
+      natively without modification. Developers coming from Ethereum or any EVM chain
+      face minimal migration friction.
+    </p>
+
+    <div class="table-wrap">
+      <table aria-label="Developer use cases">
+        <thead>
+          <tr><th>Use case</th><th>What Core Chain enables</th></tr>
+        </thead>
+        <tbody>
+          <tr class="hi">
+            <td>DeFi with BTC liquidity</td>
+            <td>Build lending, DEX, and yield protocols where coreBTC provides native BTC liquidity — without relying on Ethereum bridge infrastructure</td>
+          </tr>
+          <tr>
+            <td>Bitcoin-native NFTs</td>
+            <td>Issue NFTs secured by Bitcoin mining power with EVM smart contract functionality — bridging Bitcoin culture with programmable NFT standards</td>
+          </tr>
+          <tr class="hi">
+            <td>Cross-chain applications</td>
+            <td>Build apps that interact with both Bitcoin (for settlement and BTC staking) and Core Chain (for smart contract execution) in a unified developer experience</td>
+          </tr>
+          <tr>
+            <td>Stablecoin protocols</td>
+            <td>Use coreBTC and CORE as collateral for stablecoin issuance — Bitcoin-backed stable assets without dependence on Ethereum infrastructure</td>
+          </tr>
+          <tr class="hi">
+            <td>BTC yield products</td>
+            <td>Build structured products around Core's BTC staking yield — vaults, optimisers, and aggregators that automate CORE reward compounding for BTC stakers</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- SAFETY -->
+  <section class="card" id="safety">
+    <h2>CoreDAO Risks: BTC Staking, Smart-Contract, and Protocol Risks</h2>
+
+    <div class="table-wrap">
+      <table aria-label="Risk analysis">
+        <thead>
+          <tr><th>Risk</th><th>Level</th><th>Mitigation</th></tr>
+        </thead>
+        <tbody>
+          <tr class="hi">
+            <td>BTC time-lock irreversibility</td>
+            <td class="err">High if wrong duration chosen</td>
+            <td>Carefully choose lock duration — BTC is unspendable until lock expires, no exceptions</td>
+          </tr>
+          <tr>
+            <td>CORE token price risk on BTC rewards</td>
+            <td class="warn">Medium</td>
+            <td>Rewards are denominated in CORE — if CORE price falls, USD yield falls with it</td>
+          </tr>
+          <tr class="hi">
+            <td>coreBTC locker failure</td>
+            <td class="warn">Low-Medium</td>
+            <td>Lockers are over-collateralised with CORE; insurance fund backstops locker defaults</td>
+          </tr>
+          <tr>
+            <td>Smart-contract exploit on Core Chain</td>
+            <td class="warn">Medium</td>
+            <td>Multiple audits; EVM-compatibility means standard Ethereum audit tooling applies</td>
+          </tr>
+          <tr class="hi">
+            <td>Validator slashing</td>
+            <td class="warn">Low-Medium</td>
+            <td>Choose validators with strong uptime history; diversify across multiple validators for large stakes</td>
+          </tr>
+          <tr>
+            <td>Script construction error (BTC staking)</td>
+            <td class="err">High if using manual scripts</td>
+            <td>Always use the official Core staking interface to construct time-lock transactions</td>
+          </tr>
+          <tr class="hi">
+            <td>Phishing / fake Core staking sites</td>
+            <td class="err">High (user-controlled)</td>
+            <td>Bookmark official URL; verify domain before connecting wallet or constructing BTC transactions</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- COMPARISON -->
+  <section class="card" id="comparison">
+    <h2>CoreDAO vs Rootstock vs Stacks vs Babylon: Bitcoin Layer Comparison</h2>
+
+    <div class="table-wrap">
+      <table aria-label="Bitcoin ecosystem comparison">
+        <thead>
+          <tr><th>Feature</th><th>CoreDAO</th><th>Rootstock (RSK)</th><th>Stacks</th><th>Babylon</th></tr>
+        </thead>
+        <tbody>
+          <tr class="hi">
+            <td>BTC security model</td>
+            <td>Miner delegation + BTC time-lock + DPoS</td>
+            <td>Merge mining with BTC miners</td>
+            <td>PoX — BTC transferred to Stacks miners</td>
+            <td>BTC staking for external chain security</td>
+          </tr>
+          <tr>
+            <td>EVM compatible</td>
+            <td class="ok">Full EVM</td>
+            <td class="ok">Full EVM (Ethereum-compatible)</td>
+            <td class="warn">Clarity VM (not EVM)</td>
+            <td class="warn">Infrastructure layer, not a chain</td>
+          </tr>
+          <tr class="hi">
+            <td>Non-custodial BTC staking</td>
+            <td class="ok">Yes — CLTV time-lock on Bitcoin</td>
+            <td class="err">No</td>
+            <td class="warn">BTC used in consensus (not staked)</td>
+            <td class="ok">Yes — core design</td>
+          </tr>
+          <tr>
+            <td>BTC yield in native BTC</td>
+            <td class="warn">No — rewards in CORE</td>
+            <td class="err">No</td>
+            <td class="warn">STX rewards (not BTC)</td>
+            <td class="warn">Depends on integrated chain</td>
+          </tr>
+          <tr class="hi">
+            <td>DeFi ecosystem maturity</td>
+            <td class="ok">Growing rapidly</td>
+            <td class="warn">Established but limited</td>
+            <td class="warn">Growing</td>
+            <td class="warn">Early stage</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note" style="margin-top:1rem">
+      <strong>CoreDAO's differentiation:</strong> The combination of full EVM compatibility,
+      non-custodial BTC staking via CLTV, and Bitcoin miner delegation in a single consensus
+      model is unique to Core Chain. For Bitcoin holders seeking EVM DeFi access with Bitcoin
+      security alignment, Core Chain offers the most complete package available in 2026.
+    </div>
+  </section>
+
+  <!-- BEST PRACTICES -->
+  <section class="card" id="best-practices">
+    <h2>Best Practices for BTC Stakers and CORE Holders on Core Chain</h2>
+
+    <h3>For BTC stakers</h3>
+    <ul style="padding-left:1.2rem; margin-bottom:1.2rem">
+      <li style="margin-bottom:.5rem"><strong>Only use the official Core staking interface</strong> to construct time-lock transactions — incorrect CLTV script construction can result in permanently inaccessible BTC. This is irreversible and cannot be rescued.</li>
+      <li style="margin-bottom:.5rem"><strong>Choose lock duration conservatively at first</strong> — test with a small BTC amount and a short lock duration to verify the full workflow (lock, reward claim, unlock) before committing larger amounts.</li>
+      <li style="margin-bottom:.5rem"><strong>Never lock BTC you may need before expiry</strong> — emergencies, market volatility, or changing plans don't override Bitcoin's CLTV script. The lock is absolute.</li>
+      <li style="margin-bottom:.5rem"><strong>Verify the reward address carefully</strong> — CORE rewards go to the address specified in your time-lock transaction. Ensure this is a Core Chain address you control and can access.</li>
+      <li><strong>Research your chosen validator</strong> before locking BTC behind them — a poorly performing validator earns fewer rewards for all BTC stakers delegating to them.</li>
+    </ul>
+
+    <h3>For CORE stakers and delegators</h3>
+    <ul style="padding-left:1.2rem">
+      <li style="margin-bottom:.5rem"><strong>Diversify across multiple validators</strong> for significant CORE positions — validator downtime or slashing events affect all delegators of that validator.</li>
+      <li style="margin-bottom:.5rem"><strong>Monitor validator score health</strong> — a validator whose miner hash delegation or BTC time-lock support drops significantly will fall in the election ranking and may exit the active set, pausing your rewards.</li>
+      <li style="margin-bottom:.5rem"><strong>Understand the unbonding period</strong> before staking CORE — staked CORE has a withdrawal delay. Do not stake funds needed in the near term.</li>
+      <li><strong>Bookmark the official Core Chain staking URL</strong> — phishing sites targeting BTC stakers are dangerous because BTC time-lock errors are irreversible. Verify the domain every session.</li>
+    </ul>
+  </section>
+
+  <!-- TROUBLESHOOTING -->
+  <section class="card" id="troubleshooting">
+    <h2>Troubleshooting CoreDAO: BTC Staking, Reward Claims, and Validator Issues</h2>
+
+    <h3>"My BTC time-lock transaction was confirmed but I'm not seeing CORE rewards"</h3>
+    <ul style="padding-left:1.2rem">
+      <li>Core Chain needs to recognise the Bitcoin transaction — this requires a minimum number of Bitcoin confirmations. Allow sufficient time (typically 10–20 Bitcoin confirmations) before rewards begin accruing.</li>
+      <li>Verify the time-lock transaction was correctly formatted — specifically that the Core validator address and reward address are embedded correctly. Use the official Core staking dashboard to check recognition status.</li>
+      <li>CORE rewards accrue over rounds and must be manually claimed via the Core Chain staking interface — they don't automatically transfer to your wallet.</li>
+    </ul>
+
+    <h3>"My chosen validator dropped out of the active set"</h3>
+    <ul style="padding-left:1.2rem">
+      <li>A validator no longer in the active 21 produces no blocks and generates no rewards for its delegators. Re-delegate your CORE stake to an active validator to resume earning.</li>
+      <li>For BTC time-lock staking, you cannot re-delegate mid-lock — the validator choice is embedded in the Bitcoin transaction. Plan validator selection carefully before locking.</li>
+    </ul>
+
+    <h3>"I can't claim CORE rewards from BTC staking"</h3>
+    <ul style="padding-left:1.2rem">
+      <li>CORE reward claims require a small CORE gas fee on Core Chain. Ensure your reward address (Core Chain address) has a small CORE balance for gas before attempting to claim.</li>
+      <li>If your reward address is a Bitcoin address rather than a Core Chain address, verify the claiming process in the official documentation — the flow differs between address types.</li>
+    </ul>
+
+    <div class="note">
+      <strong>Bitcoin transaction finality:</strong> Any issue with a BTC time-lock transaction
+      is governed by Bitcoin's rules — not Core Chain's. Always verify Bitcoin transaction
+      status on a Bitcoin block explorer (Mempool.space, Blockstream.info) before contacting
+      Core support. The Bitcoin-side confirmation is the first dependency in the entire flow.
+    </div>
+  </section>
+
+  <!-- EEAT -->
+  <section class="eeat" id="eeat" aria-labelledby="eeat-title">
+    <h2 id="eeat-title">CoreDAO: Authoritative References &amp; External Sources</h2>
+
+    <h3>CoreDAO — Official Sources</h3>
+    <ul style="padding-left:1.2rem">
+      <li><a href="https://coredao.org/" target="_blank" rel="noopener nofollow">CoreDAO — Official Website</a></li>
+      <li><a href="https://docs.coredao.org/" target="_blank" rel="noopener nofollow">CoreDAO — Official Documentation</a></li>
+      <li><a href="https://github.com/coredao-org" target="_blank" rel="noopener nofollow">CoreDAO — Source Code (GitHub)</a></li>
+      <li><a href="https://scan.coredao.org/" target="_blank" rel="noopener nofollow">Core Chain Explorer — Block Explorer</a></li>
+    </ul>
+
+    <h3>Bitcoin Context &amp; Tools</h3>
+    <ul style="padding-left:1.2rem">
+      <li><a href="https://bitcoin.org/" target="_blank" rel="noopener nofollow">Bitcoin.org — Official Bitcoin Resource</a></li>
+      <li><a href="https://mempool.space/" target="_blank" rel="noopener nofollow">Mempool.space — Bitcoin Block Explorer &amp; Mempool</a></li>
+      <li><a href="https://learnmeabitcoin.com/technical/script/p2sh/" target="_blank" rel="noopener nofollow">Learn Me a Bitcoin — Bitcoin Script Reference</a></li>
+    </ul>
+
+    <h3>DeFi Data &amp; Security</h3>
+    <ul style="padding-left:1.2rem">
+      <li><a href="https://defillama.com/chain/Core" target="_blank" rel="noopener nofollow">DeFiLlama — Core Chain TVL &amp; Protocol Data</a></li>
+      <li><a href="https://revoke.cash/" target="_blank" rel="noopener nofollow">Revoke.cash — Token Approval Manager</a></li>
+      <li><a href="https://blog.openzeppelin.com/security-audits" target="_blank" rel="noopener nofollow">OpenZeppelin — Smart Contract Security Audits</a></li>
+    </ul>
+
+    <div class="note" style="margin-top:1.2rem">
+      <strong>About:</strong> Prepared by Crypto Finance Experts as a practical, SEO-oriented knowledge base for
+      <em>CoreDAO</em>: Satoshi Plus consensus, non-custodial BTC staking, CORE token, validators, coreBTC, EVM development, and security.
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="card" id="faq" aria-labelledby="faq-title">
+    <h2 id="faq-title" style="margin-top:0;border-top:none;padding-top:0">CoreDAO: Frequently Asked Questions</h2>
+
+    <div class="faq-item">
+      <button class="faq-button" aria-expanded="false" aria-controls="f1" id="b1">
+        <h3>What is CoreDAO and what is Core Chain?</h3><span class="faq-plus">+</span>
+      </button>
+      <div id="f1" class="faq-content" role="region" aria-labelledby="b1">
+        <p>CoreDAO is the decentralised autonomous organisation governing Core Chain — a Layer 1 blockchain with full EVM compatibility secured by the Satoshi Plus consensus mechanism. Satoshi Plus combines Bitcoin miner hash power delegation, non-custodial BTC time-lock staking, and CORE token DPoS staking into a single validator election system, making Core Chain uniquely Bitcoin-aligned while maintaining EVM programmability.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-button" aria-expanded="false" aria-controls="f2" id="b2">
+        <h3>How is BTC staking on Core different from other BTC yield products?</h3><span class="faq-plus">+</span>
+      </button>
+      <div id="f2" class="faq-content" role="region" aria-labelledby="b2">
+        <p>Core's BTC staking uses CLTV (CheckLockTimeVerify) — a native Bitcoin script opcode — to time-lock BTC directly on the Bitcoin network. Your BTC never leaves Bitcoin, never gets wrapped, and never goes to a custodian or bridge contract. It's secured by Bitcoin's own scripting language and cryptography. The only trade-off is illiquidity during the lock period — the BTC cannot be moved until the time-lock expires, by anyone, including you.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-button" aria-expanded="false" aria-controls="f3" id="b3">
+        <h3>What rewards do I earn for staking BTC on Core Chain?</h3><span class="faq-plus">+</span>
+      </button>
+      <div id="f3" class="faq-content" role="region" aria-labelledby="b3">
+        <p>BTC stakers receive CORE tokens as rewards — not additional BTC. CORE rewards are emitted from Core Chain's block reward schedule and distributed to BTC stakers proportional to their locked BTC amount, lock duration, and the chosen validator's performance. The USD value of these rewards depends on CORE's market price, which fluctuates. There is no guaranteed BTC-denominated yield.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-button" aria-expanded="false" aria-controls="f4" id="b4">
+        <h3>What is Satoshi Plus consensus?</h3><span class="faq-plus">+</span>
+      </button>
+      <div id="f4" class="faq-content" role="region" aria-labelledby="b4">
+        <p>Satoshi Plus is Core Chain's consensus mechanism that combines three security inputs: Bitcoin miners delegating hash power (at zero cost via coinbase metadata), BTC holders time-locking BTC on Bitcoin mainnet, and CORE holders staking via DPoS. Each round, the 21 validators with the highest combined score across all three layers are elected to produce blocks. This hybrid design gives Core Chain security properties from both Bitcoin proof-of-work and proof-of-stake systems simultaneously.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-button" aria-expanded="false" aria-controls="f5" id="b5">
+        <h3>Can I get my BTC back before the time-lock expires?</h3><span class="faq-plus">+</span>
+      </button>
+      <div id="f5" class="faq-content" role="region" aria-labelledby="b5">
+        <p>No — this is an absolute characteristic of CLTV time-locks in Bitcoin. Once the transaction is broadcast and confirmed, the BTC output cannot be spent by anyone — including you — until the specified block height or timestamp is reached. There is no override, no emergency exit, and no way for Core Chain or any third party to help you access locked BTC early. This is by design and is what makes the staking truly non-custodial.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-button" aria-expanded="false" aria-controls="f6" id="b6">
+        <h3>What is coreBTC and how is it different from BTC staking?</h3><span class="faq-plus">+</span>
+      </button>
+      <div id="f6" class="faq-content" role="region" aria-labelledby="b6">
+        <p>coreBTC is a decentralised wrapped BTC token on Core Chain — BTC is held by a locker network (over-collateralised with CORE) and coreBTC is minted 1:1 on Core Chain for use in DeFi. BTC time-lock staking keeps BTC on Bitcoin mainnet with no custodian — purely a time-lock script. coreBTC involves moving BTC to a locker network, adding custodial and smart-contract risk but enabling DeFi interactions. For maximum security: use time-lock staking. For DeFi access: use coreBTC.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-button" aria-expanded="false" aria-controls="f7" id="b7">
+        <h3>Is Core Chain compatible with Ethereum wallets and tools?</h3><span class="faq-plus">+</span>
+      </button>
+      <div id="f7" class="faq-content" role="region" aria-labelledby="b7">
+        <p>Yes — Core Chain is fully EVM-compatible. MetaMask, Rabby, and any EVM-compatible wallet work by adding Core Chain as a custom network. Solidity smart contracts deploy without modification. Ethereum developer tools (Hardhat, Foundry, Remix, Ethers.js, Web3.js) all work natively. For CORE-specific features like BTC staking, use the official Core Chain staking interface alongside your EVM wallet.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-button" aria-expanded="false" aria-controls="f8" id="b8">
+        <h3>How do Bitcoin miners benefit from participating in Core Chain?</h3><span class="faq-plus">+</span>
+      </button>
+      <div id="f8" class="faq-content" role="region" aria-labelledby="b8">
+        <p>Bitcoin miners earn additional CORE token rewards at zero marginal cost. They simply add a metadata output (OP_RETURN) to their coinbase transactions indicating their Core validator preference. This doesn't change their mining setup, pool membership, or hardware — it's just an additional data field in a transaction they're already producing. The CORE rewards they earn are additive income on top of their normal Bitcoin block rewards.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-button" aria-expanded="false" aria-controls="f9" id="b9">
+        <h3>How does CoreDAO compare to other Bitcoin L2s like Stacks or Rootstock?</h3><span class="faq-plus">+</span>
+      </button>
+      <div id="f9" class="faq-content" role="region" aria-labelledby="b9">
+        <p>Core Chain is uniquely positioned: it's the only Bitcoin-aligned chain that combines full EVM compatibility, non-custodial BTC staking (CLTV time-locks), and Bitcoin miner hash delegation in a single consensus mechanism. Rootstock (RSK) offers EVM compatibility via Bitcoin merge-mining but no BTC staking yield. Stacks uses its own Clarity VM (not EVM) with a BTC-anchored PoX mechanism. Babylon focuses on BTC staking infrastructure for external chains rather than being a full EVM platform itself.</p>
+      </div>
+    </div>
+
+  </section>
+
+</main>
+
+<footer class="container" role="contentinfo" style="padding:2.5rem 0; border-top:1px solid var(--line); margin-top:2rem">
+  <p style="color:var(--dim); font-size:.93rem">© 2026 CoreDAO Guide. Educational content with a security-first operational focus. Not financial advice.</p>
+</footer>
+
+<script>
+  document.querySelectorAll('.faq-button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const isOpen = btn.getAttribute('aria-expanded') === 'true';
+      document.querySelectorAll('.faq-button').forEach(b => {
+        b.setAttribute('aria-expanded', 'false');
+        const c = document.getElementById(b.getAttribute('aria-controls'));
+        c.classList.remove('open'); c.style.maxHeight = '0';
+      });
+      if (!isOpen) {
+        btn.setAttribute('aria-expanded', 'true');
+        const content = document.getElementById(btn.getAttribute('aria-controls'));
+        content.classList.add('open');
+        content.style.maxHeight = content.scrollHeight + 'px';
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
